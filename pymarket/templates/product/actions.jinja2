@@ -1,0 +1,28 @@
+{% extends 'templates/base/sys.jinja2' %}
+
+{% block page_title %}
+	Home
+{% endblock %}
+
+{% block page_css %}
+{% endblock %}
+
+{% block page_content %}
+
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="content text-center">
+				<h2 class="text-center">Products</h2>
+				<br>
+				<div class="btn-group">
+					<a href="{{request.route_url('product_add')}}" class="btn btn-lg btn-primary">Add</a>
+					<a href="{{request.route_url('product_list')}}" class="btn btn-lg btn-primary">List</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}

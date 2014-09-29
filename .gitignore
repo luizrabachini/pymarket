@@ -1,0 +1,4 @@
+*.pyc
+*.egg-info
+wsgi.py
+robots.txt

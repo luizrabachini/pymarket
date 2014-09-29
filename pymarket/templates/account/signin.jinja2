@@ -1,0 +1,25 @@
+{% extends 'templates/base/site.jinja2' %}
+
+{% block page_title %}
+	Signin
+{% endblock %}
+
+{% block page_css %}
+	<link href="{{request.static_url('pymarket:static/css/signin.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+
+	<form class="form-signin" role="form" action="" method="post">
+		<input type="text" name="email" class="form-control" placeholder="Email address" required autofocus>
+		<input type="password" name="password" class="form-control" placeholder="Password" required>
+		<br>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Access</button>
+		<br>
+		<p style="text-align: center;">or <a href="{{request.route_url('signup')}}">Create account</a></p>
+	</form>
+
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}

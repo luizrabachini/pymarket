@@ -1,0 +1,70 @@
+{% extends 'templates/base/sys.jinja2' %}
+
+{% block page_title %}
+	Cart
+{% endblock %}
+
+{% block page_css %}
+	<style type="text/css">
+		.table td {
+			text-align: center;
+		}
+		.table th {
+			text-align: center;
+		}
+	</style>
+{% endblock %}
+
+{% block page_content %}
+
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="content">
+				<h2 class="text-center">Your Products</h2>
+				<br>
+				<div class="row">
+					<div class="col-sm-12">
+						<h4 class="pull-left">You will pay <b>$ {{request.session['amount']}}</b></h4>
+						<a class="btn btn-warning pull-right" href="{{request.route_url('product_cart_clear')}}">Clear Cart</a>
+					</div>
+				</div>
+				<hr></hr>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for product in products %}
+							<tr>
+								<td>
+									{{ loop.index }}
+								</td>
+								<td>
+									{{ product.name }}
+								</td>
+								<td>
+									{{ product.description }}
+								</td>
+								<td>
+									$ {{ product.price }}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="text-center">
+					<a class="btn btn-lg btn-success" href="{{request.route_url('product_cart_save')}}">Save Cart</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}

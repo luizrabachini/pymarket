@@ -1,0 +1,84 @@
+{% extends 'templates/base/sys.jinja2' %}
+
+{% block page_title %}
+	List Products
+{% endblock %}
+
+{% block page_css %}
+	<style type="text/css">
+		.table td {
+			text-align: center;
+		}
+		.table th {
+			text-align: center;
+		}
+	</style>
+{% endblock %}
+
+{% block page_content %}
+
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="content">
+				<h2 class="text-center">List Products</h2>
+				<br>
+				{% if products.count() > 0 %}
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Price</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for product in products %}
+								<tr>
+									<td>
+										{{ loop.index }}
+									</td>
+									<td>
+										{{ product.name }}
+									</td>
+									<td>
+										{{ product.description }}
+									</td>
+									<td>
+										$ {{ product.price }}
+									</td>
+									<td>
+										<a class="btn btn-xs btn-danger" href="{{request.route_url('product_remove', id=product._id)}}">Remove</a>
+										<a class="btn btn-xs btn-primary" href="{{request.route_url('product_edit', id=product._id)}}">Edit</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				{% else %}
+					<div class="alert alert-info" role="alert">
+						<p class="text-center">Nothing to show.</p>
+					</div>
+					<br>
+					<div class="text-center">
+						<a href="{{request.route_url('product_actions')}}" class="btn btn-lg btn-primary">Go to Products</a>
+					</div>
+				{% endif %}
+				<div class="text-center">
+					<a class="btn btn-lg btn-primary" href="{{request.route_url('product_add')}}">Add</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block page_js %}
+	<script src="{{request.static_url('pymarket:static/js/jquery.mask.min.js')}}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.money').mask('000.00', {reverse: true});
+		});
+	</script>
+{% endblock %}

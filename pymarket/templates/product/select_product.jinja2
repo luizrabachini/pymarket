@@ -1,0 +1,121 @@
+{% extends 'templates/base/sys.jinja2' %}
+
+{% block page_title %}
+	Cart
+{% endblock %}
+
+{% block page_css %}
+	<link href="{{request.static_url('pymarket:static/css/cart.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="content">
+				<h2 class="text-center">Available Products</h2>
+				{% if request.session['current_cart']|length > 0 %}
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="pull-left">You will pay <b>$ {{request.session['amount']}}</b></h4>
+							<a class="btn btn-primary pull-right" href="{{request.route_url('product_cart_finalize')}}">Finalize</a>
+						</div>
+					</div>
+				{% endif %}
+				<hr></hr>
+				{% if products.count() > 0 %}
+					<div id="products" class="row list-group">
+						{% for product in products %}
+							<div class="item  col-xs-4 col-lg-4">
+								<div class="thumbnail">
+									<img class="img-rounded" src="{{request.static_url('pymarket:static/img/box.png')}}">
+									<br>
+									<div class="caption">
+										<h4 class="group inner list-group-item-heading">
+											{{ product.name }}</h4>
+										<p class="group inner list-group-item-text">
+											{{ product.description }}</p><br>
+										<div class="row">
+											<div class="col-xs-12 col-md-6">
+												<p class="lead">
+													$ {{ product.price }}</p>
+											</div>
+											<div class="col-xs-12 col-md-6">
+												{% if product._id in request.session['current_cart'] %}
+													<a class="btn btn-warning pull-right" href="{{request.route_url('product_cart_remove', id=product._id)}}">Remove</a>
+												{% else %}
+													<a class="btn btn-success pull-right" href="{{request.route_url('product_cart_add', id=product._id)}}">Add</a>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% else %}
+					<div class="alert alert-info" role="alert">
+						<p class="text-center">Nothing to show.</p>
+					</div>
+					<br>
+					<div class="text-center">
+						<a href="{{request.route_url('product_add')}}" class="btn btn-lg btn-primary">Add a Product</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	{% if carts.count() > 0 %}
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="content">
+					<h2 class="text-center">Recent Products</h2>
+					<hr></hr>
+					<br>
+					{% for cart in carts %}
+						<h4 class="text-left">Amount: $ {{cart['amount']}}</h4>
+						{% if cart['date_time'] %}
+							<h4 class="text-right">{{cart['date_time'].strftime('%Y-%m-%d')}}</h4>
+						{% else %}
+							<h4 class="text-right">No date available</h4>
+						{% endif %}
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for product in cart['products'] %}
+									<tr>
+										<td>
+											{{ loop.index }}
+										</td>
+										<td>
+											{{ product.name }}
+										</td>
+										<td>
+											{{ product.description }}
+										</td>
+										<td>
+											$ {{ product.price }}
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						<br>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block page_js %}
+{% endblock %}

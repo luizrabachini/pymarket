@@ -1,0 +1,8 @@
+<div class="row nav-content">
+	<div class="col-sm-3 col-sm-offset-3 {% if nav_opt == 'product' %}active{% endif %}">
+		<a href="{{request.route_url('product_actions')}}"><h4><span class="glyphicon glyphicon-list-alt icon-big"></span><br>Products</h4></a>
+	</div>
+	<div class="col-sm-3 {% if nav_opt == 'cart' %}active{% endif %}">
+		<a href="{{request.route_url('product_select')}}"><h4><span class="glyphicon glyphicon-shopping-cart icon-big"></span><br>Cart</h4></a>
+	</div>
+</div>

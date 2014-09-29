@@ -1,0 +1,49 @@
+.nav-content {
+  text-align: center;
+  margin-top: 50px;
+  background-color: #5974a2;
+}
+
+.nav-content div {
+  padding: 30px;
+}
+
+.nav-content div h4 {
+  color: #ffffff;
+}
+
+.nav-content div .active {
+  background-color: red;
+}
+
+.nav-content a {
+  text-decoration: none;
+}
+
+.nav-content a:hover {
+  color: red;
+}
+
+.nav-main {
+  background-color: #1f2838;
+}
+
+.nav-main a {
+  color: #ffffff;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.nav-main a:hover {
+  background-color: transparent !important;
+}
+
+.icon-big {
+  font-size: 40pt;
+  padding-bottom: 20px;
+}
+
+.content {
+  color: #455660;
+  padding: 20px;
+}
